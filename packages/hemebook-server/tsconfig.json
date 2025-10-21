@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "lib": ["DOM", "es2018"],
+    "target": "ESNext",
+    "module": "NodeNext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "outDir": "dist",
+    "declaration": false,
+    "strict": true,
+    "allowJs": true
+  },
+  "include": [
+    "src",
+  ]
+}

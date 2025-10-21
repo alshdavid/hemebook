@@ -1,0 +1,14 @@
+{
+  "name": "hemebook-server",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/main_httpd.ts",
+    "build": "npx esbuild ./src/main_lambda.ts --outfile=dist/handler.mjs --format=esm --bundle --platform=node"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.24",
+    "aws-jwt-verify": "^5.1.0",
+    "esbuild": "^0.25.5"
+  }
+}

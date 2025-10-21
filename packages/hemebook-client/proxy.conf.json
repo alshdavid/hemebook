@@ -1,0 +1,14 @@
+{
+    "/api2/**": {
+        "target": "https://m6ruuwwt3c.execute-api.ap-southeast-2.amazonaws.com",
+        "secure": true,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/api/**": {
+        "target": "http://localhost:3000",
+        "secure": true,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

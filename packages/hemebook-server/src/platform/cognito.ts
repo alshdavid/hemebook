@@ -1,0 +1,53 @@
+import { COGNITO_CLIENT_ID, COGNITO_CLIENT_SECRET, COGNITO_ORIGIN, LOCAL_ORIGIN, TOKEN_ENDPOINT } from "./config.ts"
+
+export async function exchange(
+  code: string,
+) {
+  const target = new URL(COGNITO_ORIGIN)
+  target.pathname = TOKEN_ENDPOINT
+
+  const body = new URLSearchParams()
+  body.set('client_id', COGNITO_CLIENT_ID)
+  body.set('client_secret', COGNITO_CLIENT_SECRET)
+  body.set('grant_type', 'authorization_code')
+  body.set('code', code)
+  body.set('redirect_uri', `${LOCAL_ORIGIN}/api/auth/login/callback`)
+  target.searchParams.set('scope', 'email/openid')
+
+  const response = await fetch(target.toString(), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: body.toString()
+  })
+
+  if (!response.ok) {
+    throw new Error(`Unable to exchange code\nCode: ${code}`)
+  }
+
+  return response.json()
+}
+
+export async function refresh(
+  refresh_token: string,
+) {
+  const target = new URL(COGNITO_ORIGIN)
+  target.pathname = TOKEN_ENDPOINT
+
+  const body = new URLSearchParams()
+  body.set('client_id', COGNITO_CLIENT_ID)
+  body.set('client_secret', COGNITO_CLIENT_SECRET)
+  body.set('grant_type', 'refresh_token')
+  body.set('refresh_token', refresh_token)
+
+  const response = await fetch(target.toString(), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: body.toString()
+  })
+
+  return response.json()
+}
